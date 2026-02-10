@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none !important;
+            cursor: pointer !important;
         }
 
         body {
@@ -43,6 +43,11 @@
             width: auto;
             height: auto;
             z-index: 1;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            pointer-events: none;
         }
 
 
@@ -75,6 +80,113 @@
         .desktop-link:hover {
             opacity: 0.7;
         }
+
+        .winamp-player {
+            position: fixed;
+            top: 80px;
+            left: 80px;
+            width: 275px;
+            height: 116px;
+            background: linear-gradient(45deg, #ff69b4 0%, #ff1493 30%, #8b008b 100%);
+            border: 2px solid;
+            border-color: #ffb6c1 #800080 #800080 #ffb6c1;
+            font-family: 'MS Sans Serif', sans-serif;
+            font-size: 8px;
+            z-index: 100;
+            image-rendering: pixelated;
+            cursor: auto !important;
+            box-shadow: inset 1px 1px 0 rgba(255,255,255,0.5), inset -1px -1px 0 rgba(0,0,0,0.5);
+        }
+
+        .winamp-title {
+            background: linear-gradient(90deg, #4b0082 0%, #8b008b 50%, #9932cc 100%);
+            color: #ffffff;
+            padding: 2px 4px;
+            font-size: 8px;
+            font-weight: bold;
+            border-bottom: 1px solid #800080;
+            text-shadow: 1px 1px 0 #000000;
+            cursor: grab !important;
+        }
+        
+        .winamp-title:active {
+            cursor: grabbing !important;
+        }
+
+        .winamp-display {
+            background: #000000;
+            color: #00ffff;
+            margin: 4px;
+            padding: 2px 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 8px;
+            height: 20px;
+            border: 2px inset #ff69b4;
+            display: flex;
+            align-items: center;
+            text-shadow: 0 0 3px #00ffff;
+        }
+
+        .winamp-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1px;
+            margin: 4px;
+        }
+
+        .winamp-btn {
+            width: 26px;
+            height: 20px;
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 50%, #dc143c 100%);
+            border: 2px solid;
+            border-color: #ffb6c1 #8b008b #8b008b #ffb6c1;
+            font-size: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: bold;
+            text-shadow: 1px 1px 0 #000000;
+            border-radius: 2px;
+        }
+
+        .winamp-btn:active {
+            border-color: #8b008b #ffb6c1 #ffb6c1 #8b008b;
+            background: linear-gradient(135deg, #dc143c 0%, #ff1493 50%, #ff69b4 100%);
+        }
+
+        .winamp-btn:hover {
+            background: linear-gradient(135deg, #ffb6c1 0%, #ff69b4 50%, #ff1493 100%);
+        }
+
+        .winamp-volume {
+            margin: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 7px;
+            color: #ffffff;
+            text-shadow: 1px 1px 0 #000000;
+        }
+
+        .volume-slider {
+            width: 68px;
+            height: 10px;
+            background: #000000;
+            border: 2px inset #ff69b4;
+            position: relative;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        .volume-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff00 0%, #ffff00 30%, #ff4500 70%, #ff0000 100%);
+            width: 70%;
+            transition: width 0.1s;
+            border-radius: 1px;
+        }
     </style>
 </head>
 <body>
@@ -85,6 +197,26 @@
     <a href="#" class="desktop-link" data-type="cd" style="top: 40%; right: 12%;"></a>
     <a href="#" class="desktop-link" data-type="trash" style="top: 60%; right: 6%;"></a>
 
+    <div class="winamp-player">
+        <div class="winamp-title">** WORLDS ONLY **</div>
+        <div class="winamp-display" id="track-display">WOULD YOU LEAVE YOURSELF - 1. *** 01:23</div>
+        <div class="winamp-controls">
+            <button class="winamp-btn" id="prev-btn">⏮</button>
+            <button class="winamp-btn" id="play-btn">▶</button>
+            <button class="winamp-btn" id="pause-btn">⏸</button>
+            <button class="winamp-btn" id="stop-btn">⏹</button>
+            <button class="winamp-btn" id="next-btn">⏭</button>
+        </div>
+        <div class="winamp-volume">
+            <span>VOL:</span>
+            <div class="volume-slider" id="volume-slider">
+                <div class="volume-fill" id="volume-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audio-player" preload="metadata"></audio>
     <script src="cursor.js"></script>
+    <script src="winamp.js"></script>
 </body>
 </html>
