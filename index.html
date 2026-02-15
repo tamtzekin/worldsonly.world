@@ -9,7 +9,11 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: pointer !important;
+            cursor: none !important;
+        }
+        
+        .winamp-player, .winamp-player * {
+            cursor: auto !important;
         }
 
         body {
@@ -87,9 +91,9 @@
             left: 80px;
             width: 275px;
             height: 116px;
-            background: linear-gradient(45deg, #ff69b4 0%, #ff1493 30%, #8b008b 100%);
+            background: linear-gradient(45deg, #ffc6cf 0%, #ffb3c1 30%, #e699a3 100%);
             border: 2px solid;
-            border-color: #ffb6c1 #800080 #800080 #ffb6c1;
+            border-color: #ffd9dd #d9869b #d9869b #ffd9dd;
             font-family: 'MS Sans Serif', sans-serif;
             font-size: 8px;
             z-index: 100;
@@ -99,12 +103,12 @@
         }
 
         .winamp-title {
-            background: linear-gradient(90deg, #4b0082 0%, #8b008b 50%, #9932cc 100%);
+            background: linear-gradient(90deg, #e699a3 0%, #f2b3c0 50%, #ffc6cf 100%);
             color: #ffffff;
             padding: 2px 4px;
             font-size: 8px;
             font-weight: bold;
-            border-bottom: 1px solid #800080;
+            border-bottom: 1px solid #d9869b;
             text-shadow: 1px 1px 0 #000000;
             cursor: grab !important;
         }
@@ -115,17 +119,20 @@
 
         .winamp-display {
             background: #000000;
-            color: #00ffff;
+            color: #ffc6cf;
             margin: 4px;
             padding: 2px 4px;
             font-family: 'Courier New', monospace;
             font-size: 8px;
             height: 20px;
-            border: 2px inset #ff69b4;
+            border: 2px inset #ffc6cf;
             display: flex;
             align-items: center;
-            text-shadow: 0 0 3px #00ffff;
+            text-shadow: 0 0 3px #ffc6cf;
+            overflow: hidden;
+            white-space: nowrap;
         }
+
 
         .winamp-controls {
             display: flex;
@@ -137,9 +144,9 @@
         .winamp-btn {
             width: 26px;
             height: 20px;
-            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 50%, #dc143c 100%);
+            background: linear-gradient(135deg, #ffc6cf 0%, #ffb3c1 50%, #e699a3 100%);
             border: 2px solid;
-            border-color: #ffb6c1 #8b008b #8b008b #ffb6c1;
+            border-color: #ffd9dd #d9869b #d9869b #ffd9dd;
             font-size: 10px;
             cursor: pointer;
             display: flex;
@@ -152,12 +159,12 @@
         }
 
         .winamp-btn:active {
-            border-color: #8b008b #ffb6c1 #ffb6c1 #8b008b;
-            background: linear-gradient(135deg, #dc143c 0%, #ff1493 50%, #ff69b4 100%);
+            border-color: #d9869b #ffd9dd #ffd9dd #d9869b;
+            background: linear-gradient(135deg, #e699a3 0%, #ffb3c1 50%, #ffc6cf 100%);
         }
 
         .winamp-btn:hover {
-            background: linear-gradient(135deg, #ffb6c1 0%, #ff69b4 50%, #ff1493 100%);
+            background: linear-gradient(135deg, #ffd9dd 0%, #ffc6cf 50%, #ffb3c1 100%);
         }
 
         .winamp-volume {
@@ -174,7 +181,7 @@
             width: 68px;
             height: 10px;
             background: #000000;
-            border: 2px inset #ff69b4;
+            border: 2px inset #ffc6cf;
             position: relative;
             cursor: pointer;
             border-radius: 2px;
@@ -182,23 +189,61 @@
 
         .volume-fill {
             height: 100%;
-            background: linear-gradient(90deg, #00ff00 0%, #ffff00 30%, #ff4500 70%, #ff0000 100%);
+            background: linear-gradient(90deg, #f7e3e7 0%, #f2b3c0 30%, #ffc6cf 70%, #e699a3 100%);
             width: 70%;
             transition: width 0.1s;
             border-radius: 1px;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 50;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            font-weight: normal;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 0 40px;
+        }
+
+        .bottom-nav a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: none;
+        }
+
+        .bottom-nav a:hover {
+            color: #ffc6cf;
+        }
+
+        .nav-separator {
+            flex: 1;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+            letter-spacing: 8px;
+            overflow: hidden;
+            white-space: nowrap;
         }
     </style>
 </head>
 <body>
     <div class="cursor-glow" id="cursor-glow"></div>
-    <img id="artwork-background" src="artwork.png" alt="Worlds Only Artwork">
+    <img id="artwork-background" src="artwork.png" alt="WOULD YOU LEAVE YOURSELF">
     
     <a href="mailto:hello@worldsonly.world" class="desktop-link" data-type="email" style="top: 20%; right: 8%;"></a>
     <a href="#" class="desktop-link" data-type="cd" style="top: 40%; right: 12%;"></a>
     <a href="#" class="desktop-link" data-type="trash" style="top: 60%; right: 6%;"></a>
 
     <div class="winamp-player">
-        <div class="winamp-title">** WORLDS ONLY **</div>
+        <div class="winamp-title">** WOULD YOU LEAVE YOURSELF [FULL ALBUM] **</div>
         <div class="winamp-display" id="track-display">WOULD YOU LEAVE YOURSELF - 1. *** 01:23</div>
         <div class="winamp-controls">
             <button class="winamp-btn" id="prev-btn">⏮</button>
@@ -214,6 +259,18 @@
             </div>
         </div>
     </div>
+
+    <nav class="bottom-nav">
+        <a href="https://worldsonly.bandcamp.com/album/raw-hot" target="_blank">RAW & HOT</a>
+        <span class="nav-separator">,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,</span>
+        <a href="https://worldsonly.bandcamp.com/album/courage-to-detour-and-patience-to-wait" target="_blank">COURAGE TO DETOUR AND PATIENCE TO WAIT</a>
+        <span class="nav-separator">,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,</span>
+        <a href="https://youtu.be/CWCauw0SXVQ" target="_blank">CONCERT FILM</a>
+        <span class="nav-separator">,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,</span>
+        <a href="https://www.fbi.radio/programs/the-live-feed/episodes/the-live-feed-1st-august-2025" target="_blank">VANGUARD SET</a>
+        <span class="nav-separator">,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,</span>
+        <a href="https://t.me/+YOUR_GROUP_INVITE_CODE" target="_blank">SIGN UP</a>
+    </nav>
 
     <audio id="audio-player" preload="metadata"></audio>
     <script src="cursor.js"></script>
