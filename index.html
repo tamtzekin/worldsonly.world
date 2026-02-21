@@ -232,6 +232,85 @@
             overflow: hidden;
             white-space: nowrap;
         }
+
+        .signup-form {
+            position: fixed;
+            top: 80px;
+            right: 80px;
+            z-index: 100;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .signup-form label {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 6px;
+        }
+
+        .signup-form-row {
+            position: relative;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            width: 220px;
+        }
+
+        .signup-form-row:focus-within {
+            border-bottom-color: #ffc6cf;
+        }
+
+        .signup-form input[type="email"] {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 4px 0;
+            width: 100%;
+            cursor: none;
+        }
+
+        .signup-form input[type="email"]::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .signup-form button {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 4px 0 4px 8px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: color 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .signup-form button:hover {
+            color: #ffc6cf;
+        }
+
+        .signup-form-msg {
+            margin-top: 6px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.7);
+            min-height: 16px;
+            text-transform: uppercase;
+        }
+
+        .signup-form-msg.error {
+            color: #ffc6cf;
+        }
     </style>
 </head>
 <body>
@@ -290,7 +369,55 @@
     </nav>
 
     <audio id="audio-player" preload="metadata"></audio>
+
+    <form class="signup-form" id="signup-form" novalidate>
+        <label for="signup-email">Mailing list</label>
+        <div class="signup-form-row">
+            <input type="email" id="signup-email" name="email" placeholder="your@email.com" autocomplete="email" required>
+            <button type="submit">Send</button>
+        </div>
+        <div class="signup-form-msg" id="signup-msg" aria-live="polite"></div>
+    </form>
+
     <script src="cursor.js"></script>
     <script src="winamp.js"></script>
+    <script>
+        (function () {
+            const form = document.getElementById('signup-form');
+            const input = document.getElementById('signup-email');
+            const msg = document.getElementById('signup-msg');
+
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const email = input.value.trim();
+                if (!email) return;
+
+                msg.textContent = '...';
+                msg.className = 'signup-form-msg';
+                form.querySelector('button').disabled = true;
+
+                try {
+                    const res = await fetch('/api/subscribe', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email }),
+                    });
+                    const data = await res.json();
+                    if (res.ok && data.ok) {
+                        msg.textContent = 'you\'re in';
+                        input.value = '';
+                    } else {
+                        msg.textContent = data.error || 'something went wrong';
+                        msg.className = 'signup-form-msg error';
+                    }
+                } catch {
+                    msg.textContent = 'something went wrong';
+                    msg.className = 'signup-form-msg error';
+                } finally {
+                    form.querySelector('button').disabled = false;
+                }
+            });
+        })();
+    </script>
 </body>
 </html>
