@@ -4,16 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Worlds Only</title>
+    <!-- Hide cursor immediately before any other styles load -->
+    <style>html, body, * { cursor: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7") 0 0, none !important; }</style>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none !important;
+            cursor: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7") 0 0, none !important;
         }
-        
-        .winamp-player, .winamp-player * {
-            cursor: auto !important;
+
+        /* Force cursor hidden on all elements browsers might override */
+        html, body,
+        a, button, input, select, textarea, label,
+        [role="button"], [tabindex],
+        .winamp-player, .winamp-player *,
+        .signup-form, .signup-form *,
+        .bottom-nav, .bottom-nav * {
+            cursor: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7") 0 0, none !important;
         }
 
         body {
@@ -101,7 +109,6 @@
             align-items: center;
             padding: 0 16px;
             gap: 12px;
-            cursor: auto !important;
         }
 
         .winamp-title {
@@ -135,7 +142,6 @@
             border: 1px solid rgba(255, 198, 207, 0.3);
             font-size: 10px;
             font-family: sans-serif;
-            cursor: pointer !important;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -170,7 +176,6 @@
             height: 3px;
             background: rgba(255, 198, 207, 0.15);
             position: relative;
-            cursor: pointer;
             border-radius: 2px;
         }
 
@@ -203,7 +208,7 @@
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             transition: color 0.3s ease, opacity 0.3s ease;
-            cursor: none;
+            cursor: none !important;
             display: inline-flex;
             align-items: flex-end;
         }
@@ -300,7 +305,7 @@
             letter-spacing: 2px;
             padding: 8px 0;
             width: 100%;
-            cursor: none;
+            cursor: none !important;
         }
 
         .signup-form input[type="text"]::placeholder {
@@ -315,7 +320,7 @@
             font-size: 32px;
             letter-spacing: 2px;
             padding: 8px 0 8px 24px;
-            cursor: none;
+            cursor: none !important;
             white-space: nowrap;
             transition: color 0.3s ease;
             flex-shrink: 0;

@@ -3,89 +3,98 @@ class CursorEffect {
         this.cursorGlow = document.getElementById('cursor-glow');
         this.mouseX = 0;
         this.mouseY = 0;
-        this.currentSize = 200; // Track current size for centering
+        this.isOverInteractive = false;
+        this.hasMousePosition = false;
         this.init();
     }
-    
+
     init() {
-        // Track mouse movement but keep glow hidden by default
+        // Position via left/top + translate(-50%,-50%) so it always shrinks from centre
+        this.cursorGlow.style.position = 'fixed';
+        this.cursorGlow.style.transform = 'translate(-50%, -50%)';
+        this.cursorGlow.style.borderRadius = '50%';
+        this.cursorGlow.style.opacity = '0';
+        this.cursorGlow.style.transition = 'none';
+        this.cursorGlow.style.pointerEvents = 'none';
+
         document.addEventListener('mousemove', (event) => {
-            // Store mouse position for centering
             this.mouseX = event.clientX;
             this.mouseY = event.clientY;
-            this.updateCursorPosition();
+
+            this.cursorGlow.style.left = this.mouseX + 'px';
+            this.cursorGlow.style.top = this.mouseY + 'px';
+
+            if (!this.hasMousePosition) {
+                this.hasMousePosition = true;
+                requestAnimationFrame(() => {
+                    this.cursorGlow.style.transition = 'width 0.7s ease, height 0.7s ease, filter 0.7s ease, opacity 0.4s ease';
+                    this.cursorGlow.style.opacity = '1';
+                });
+            }
         });
-        
-        // Hide cursor when mouse leaves window
+
         document.addEventListener('mouseleave', () => {
             this.cursorGlow.style.opacity = '0';
         });
-        
-        // Handle player hover effects
-        const player = document.querySelector('.winamp-player');
-        player.addEventListener('mouseenter', () => {
-            this.cursorGlow.style.opacity = '1';
-            this.currentSize = 200;
-            this.cursorGlow.style.width = '200px';
-            this.cursorGlow.style.height = '200px';
-            this.cursorGlow.style.filter = 'blur(8px)';
-            this.cursorGlow.style.background = 'radial-gradient(circle, rgba(255, 198, 207, 0.3) 0%, rgba(255, 179, 193, 0.1) 40%, rgba(255, 179, 193, 0) 70%)';
-            this.updateCursorPosition();
+
+        document.addEventListener('mouseenter', () => {
+            if (this.hasMousePosition) this.cursorGlow.style.opacity = '1';
         });
-        
-        player.addEventListener('mouseleave', () => {
-            this.cursorGlow.style.opacity = '0';
-        });
-        
-        // Handle navigation link hover effects
-        const navLinks = document.querySelectorAll('.bottom-nav a');
-        navLinks.forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                // Get the link's position
-                const rect = link.getBoundingClientRect();
-                const linkCenterX = rect.left + rect.width / 2;
-                const linkCenterY = rect.top + rect.height / 2;
-                
-                this.cursorGlow.style.opacity = '1';
-                this.currentSize = 40;
-                this.cursorGlow.style.width = '40px';
-                this.cursorGlow.style.height = '40px';
-                this.cursorGlow.style.filter = 'blur(2px)';
-                this.cursorGlow.style.background = 'radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.3) 30%, rgba(255, 255, 255, 0) 60%)';
-                
-                // Position on the link center instead of mouse
-                const offsetX = linkCenterX - (this.currentSize / 2);
-                const offsetY = linkCenterY - (this.currentSize / 2);
-                this.cursorGlow.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-            });
-            
-            link.addEventListener('mouseleave', () => {
-                // Keep visible while growing back to original size
-                this.cursorGlow.style.opacity = '1';
-                this.currentSize = 200;
-                this.cursorGlow.style.width = '200px';
-                this.cursorGlow.style.height = '200px';
-                this.cursorGlow.style.filter = 'blur(8px)';
-                this.cursorGlow.style.background = 'radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 60%)';
-                this.updateCursorPosition(); // Back to mouse position
-                
-                // Then fade out smoothly
-                setTimeout(() => {
-                    this.cursorGlow.style.opacity = '0';
-                }, 300); // Longer delay to show the full growth animation
+
+        // Start in large glow state
+        this.applyGlowStyle();
+
+        // Interactive zones: shrink glow to a dot
+        const interactiveSelectors = [
+            '.winamp-player',
+            '.signup-form',
+            '.bottom-nav a',
+        ];
+
+        interactiveSelectors.forEach(sel => {
+            document.querySelectorAll(sel).forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    if (this.isOverInteractive) return;
+                    this.isOverInteractive = true;
+                    this.showDot();
+                });
+
+                el.addEventListener('mouseleave', (e) => {
+                    const related = e.relatedTarget;
+                    const stillInteractive = related && (
+                        related.closest('.winamp-player') ||
+                        related.closest('.signup-form') ||
+                        related.closest('.bottom-nav')
+                    );
+                    if (stillInteractive) return;
+                    this.isOverInteractive = false;
+                    this.showGlow();
+                });
             });
         });
     }
-    
-    updateCursorPosition() {
-        // Center the cursor based on current size
-        const offsetX = this.mouseX - (this.currentSize / 2);
-        const offsetY = this.mouseY - (this.currentSize / 2);
-        this.cursorGlow.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+
+    applyGlowStyle() {
+        this.cursorGlow.style.width = '200px';
+        this.cursorGlow.style.height = '200px';
+        this.cursorGlow.style.background = 'radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 60%)';
+        this.cursorGlow.style.filter = 'blur(8px)';
+    }
+
+    showGlow() {
+        this.cursorGlow.style.transition = 'width 0.7s ease, height 0.7s ease, filter 0.7s ease, opacity 0.4s ease';
+        this.applyGlowStyle();
+    }
+
+    showDot() {
+        this.cursorGlow.style.transition = 'width 0.7s ease, height 0.7s ease, filter 0.7s ease, opacity 0.4s ease';
+        this.cursorGlow.style.width = '14px';
+        this.cursorGlow.style.height = '14px';
+        this.cursorGlow.style.background = 'radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%)';
+        this.cursorGlow.style.filter = 'blur(3px)';
     }
 }
 
-// Initialize cursor effect when page loads
 document.addEventListener('DOMContentLoaded', () => {
     new CursorEffect();
 });
