@@ -336,6 +336,82 @@
         .signup-form-msg.error {
             color: #ffc6cf;
         }
+
+        /* iPhone 12/13/14/15 and similar — 390px logical width */
+        @media (max-width: 430px) {
+            /* Artwork — large but centred */
+            #artwork-background {
+                max-width: 94vw;
+                max-height: 94vw;
+            }
+
+            #artwork-blur {
+                width: 94vw;
+                height: 94vw;
+            }
+
+            /* Player bar — 56px tall, buttons big enough for thumbs */
+            .winamp-player {
+                height: 56px;
+                padding: 0 10px;
+                gap: 6px;
+            }
+
+            .winamp-btn {
+                width: 42px;
+                height: 42px;
+                font-size: 16px;
+                border-radius: 4px;
+            }
+
+            .winamp-display {
+                font-size: 12px;
+                letter-spacing: 0;
+            }
+
+            .winamp-volume {
+                font-size: 10px;
+                gap: 4px;
+            }
+
+            .volume-slider {
+                width: 44px;
+            }
+
+            /* Newsletter form — full-width feel, readable size */
+            .signup-form {
+                width: 94%;
+                font-size: 22px;
+                padding: 20px 16px;
+                letter-spacing: 0.5px;
+            }
+
+            .signup-form input[type="email"] {
+                font-size: 22px;
+                letter-spacing: 0.5px;
+            }
+
+            .signup-form button {
+                font-size: 22px;
+                letter-spacing: 0.5px;
+                padding: 8px 0 8px 12px;
+            }
+
+            .signup-form-msg {
+                font-size: 18px;
+            }
+
+            /* Sprite nav — smaller, evenly spread, clear of home bar */
+            .bottom-nav {
+                padding: 0 8px;
+                bottom: 28px;
+                justify-content: space-evenly;
+            }
+
+            .bottom-nav a img {
+                height: 36px;
+            }
+        }
     </style>
 </head>
 <body>
