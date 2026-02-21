@@ -489,8 +489,10 @@
                 const email = input.value.trim();
                 if (!email) return;
 
-                msg.textContent = '...';
                 msg.className = 'signup-form-msg';
+                const frames = ['—', '\\', '|', '/'];
+                let fi = 0;
+                const spinner = setInterval(() => { msg.textContent = frames[fi++ % frames.length]; }, 120);
                 form.querySelector('button').disabled = true;
 
                 try {
@@ -501,6 +503,7 @@
                     });
                     const data = await res.json();
                     console.log('subscribe response', res.status, data);
+                    clearInterval(spinner);
                     if (res.ok && data.ok) {
                         document.getElementById('signup-form-row').style.display = 'none';
                         msg.textContent = '𝔠𝔥𝔢𝔠𝔨 𝔶𝔬𝔲𝔯 𝔢𝔪𝔞𝔦𝔩.....';
@@ -516,6 +519,7 @@
                         msg.className = 'signup-form-msg error';
                     }
                 } catch (err) {
+                    clearInterval(spinner);
                     console.error('subscribe fetch failed:', err);
                     msg.textContent = 'did you type it wrong?';
                     msg.className = 'signup-form-msg error';
