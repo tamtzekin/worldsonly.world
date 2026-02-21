@@ -259,14 +259,14 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80vh;
-            height: 80vh;
+            width: 90vh;
+            height: 90vh;
             background-image: url('artwork.png');
             background-size: cover;
             background-position: center;
-            filter: blur(48px) brightness(0.4);
+            filter: blur(72px) brightness(0.3);
             z-index: 2;
-            opacity: 0.95;
+            opacity: 0.98;
             pointer-events: none;
             transition: opacity 1.2s ease;
         }
@@ -290,11 +290,11 @@
             border-bottom-color: rgba(255, 198, 207, 0.8);
         }
 
-        .signup-form input[type="email"] {
+        .signup-form input[type="text"] {
             background: transparent;
             border: none;
             outline: none;
-            color: #fff;
+            color: #ffc6cf;
             font-family: Arial, sans-serif;
             font-size: 32px;
             letter-spacing: 2px;
@@ -303,7 +303,7 @@
             cursor: none;
         }
 
-        .signup-form input[type="email"]::placeholder {
+        .signup-form input[type="text"]::placeholder {
             color: rgba(255, 198, 207, 0.5);
         }
 
@@ -346,8 +346,8 @@
             }
 
             #artwork-blur {
-                width: 94vw;
-                height: 94vw;
+                width: 106vw;
+                height: 106vw;
             }
 
             /* Player bar — 56px tall, buttons big enough for thumbs */
@@ -386,7 +386,7 @@
                 letter-spacing: 0.5px;
             }
 
-            .signup-form input[type="email"] {
+            .signup-form input[type="text"] {
                 font-size: 22px;
                 letter-spacing: 0.5px;
             }
@@ -458,7 +458,7 @@
     <div id="artwork-blur"></div>
     <form class="signup-form" id="signup-form" novalidate>
         <div class="signup-form-row" id="signup-form-row">
-            <input type="email" id="signup-email" name="email" placeholder="𝔓𝔲𝔱 𝔶𝔬𝔲𝔯 𝔢𝔪𝔞𝔦𝔩 𝔥𝔢𝔯𝔢" autocomplete="email" required>
+            <input type="text" id="signup-email" name="email" placeholder="𝔓𝔲𝔱 𝔶𝔬𝔲𝔯 𝔢𝔪𝔞𝔦𝔩 𝔥𝔢𝔯𝔢" autocomplete="email" autocapitalize="none" autocorrect="off" spellcheck="false">
             <button type="submit">𝔖𝔦𝔤𝔫 𝔘𝔭</button>
         </div>
         <div class="signup-form-msg" id="signup-msg" aria-live="polite"></div>
@@ -473,6 +473,48 @@
             const input = document.getElementById('signup-email');
             const msg = document.getElementById('signup-msg');
 
+            // --- Fraktur input mapping ---
+            const frakturMap = {
+                a:'𝔞',b:'𝔟',c:'𝔠',d:'𝔡',e:'𝔢',f:'𝔣',g:'𝔤',h:'𝔥',i:'𝔦',j:'𝔧',
+                k:'𝔨',l:'𝔩',m:'𝔪',n:'𝔫',o:'𝔬',p:'𝔭',q:'𝔮',r:'𝔯',s:'𝔰',t:'𝔱',
+                u:'𝔲',v:'𝔳',w:'𝔴',x:'𝔵',y:'𝔶',z:'𝔷',
+                A:'𝔄',B:'𝔅',C:'ℭ',D:'𝔇',E:'𝔈',F:'𝔉',G:'𝔊',H:'ℌ',I:'ℑ',J:'𝔍',
+                K:'𝔎',L:'𝔏',M:'𝔐',N:'𝔑',O:'𝔒',P:'𝔓',Q:'𝔔',R:'ℜ',S:'𝔖',T:'𝔗',
+                U:'𝔘',V:'𝔙',W:'𝔚',X:'𝔛',Y:'𝔜',Z:'ℨ'
+            };
+            // Reverse map: Fraktur char → ASCII
+            const reverseFraktur = {};
+            for (const [k,v] of Object.entries(frakturMap)) reverseFraktur[v] = k;
+
+            // Convert a string (possibly mixed Fraktur/ASCII) to plain ASCII email chars
+            function toPlain(str) {
+                let out = '';
+                for (const ch of str) {
+                    out += reverseFraktur[ch] ?? ch;
+                }
+                return out;
+            }
+
+            // Convert plain ASCII to Fraktur (non-letter chars pass through)
+            function toFraktur(str) {
+                let out = '';
+                for (const ch of str) {
+                    out += frakturMap[ch] ?? ch;
+                }
+                return out;
+            }
+
+            // Track real (plain) email value
+            let realEmail = '';
+
+            input.addEventListener('input', function () {
+                // Convert whatever is in the field back to plain, then re-render as Fraktur
+                const plain = toPlain(input.value);
+                realEmail = plain;
+                // Preserve cursor — rewriting value resets it to end, which is fine for email
+                input.value = toFraktur(plain);
+            });
+
             function fadeOut() {
                 form.style.transition = 'opacity 1.2s ease';
                 blur.style.transition = 'opacity 1.2s ease';
@@ -486,7 +528,7 @@
 
             form.addEventListener('submit', async function (e) {
                 e.preventDefault();
-                const email = input.value.trim();
+                const email = realEmail.trim();
                 if (!email) return;
 
                 msg.className = 'signup-form-msg';
@@ -511,6 +553,7 @@
                         msg.style.letterSpacing = '2px';
                         msg.style.color = '#fff';
                         input.value = '';
+                        realEmail = '';
                         setTimeout(fadeOut, 1800);
                         return;
                     } else {
