@@ -5,23 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Worlds Only</title>
     <style>
-        *, *::before, *::after {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'), none !important;
-        }
-        
-        body, html {
-            cursor: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'), none !important;
-        }
-        
-        img, a, button, div, span {
-            cursor: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'), none !important;
+            cursor: none !important;
         }
         
         .winamp-player, .winamp-player * {
-            cursor: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'), none !important;
+            cursor: auto !important;
         }
 
         body {
@@ -37,14 +29,12 @@
             width: 200px;
             height: 200px;
             border-radius: 50%;
+            transform: translate(-50%, -50%);
             filter: blur(8px);
             z-index: 9999;
             mix-blend-mode: screen;
             background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 60%);
-            transition: width 0.3s ease, height 0.3s ease, filter 0.3s ease, background 0.3s ease, opacity 0.3s ease;
-            top: 0;
-            left: 0;
-            opacity: 0;
+            transition: background 1s ease;
         }
 
         #artwork-background {
@@ -108,7 +98,7 @@
             font-size: 8px;
             z-index: 100;
             image-rendering: pixelated;
-            cursor: none !important;
+            cursor: auto !important;
             box-shadow: inset 1px 1px 0 rgba(255,255,255,0.5), inset -1px -1px 0 rgba(0,0,0,0.5);
         }
 
@@ -120,17 +110,17 @@
             font-weight: bold;
             border-bottom: 1px solid #d9869b;
             text-shadow: 1px 1px 0 #000000;
-            cursor: none !important;
+            cursor: grab !important;
         }
         
         .winamp-title:active {
-            cursor: none !important;
+            cursor: grabbing !important;
         }
 
         .winamp-display {
             background: #000000;
             color: #ffc6cf;
-            margin: 2px 4px;
+            margin: 4px;
             padding: 2px 4px;
             font-family: 'Courier New', monospace;
             font-size: 8px;
@@ -146,10 +136,9 @@
 
         .winamp-controls {
             display: flex;
-            justify-content: space-evenly;
-            gap: 4px;
+            justify-content: center;
+            gap: 1px;
             margin: 4px;
-            padding: 0 4px;
         }
 
         .winamp-btn {
@@ -159,7 +148,7 @@
             border: 2px solid;
             border-color: #ffd9dd #d9869b #d9869b #ffd9dd;
             font-size: 10px;
-            cursor: none;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -167,8 +156,6 @@
             font-weight: bold;
             text-shadow: 1px 1px 0 #000000;
             border-radius: 2px;
-            padding: 8px;
-            margin: -6px;
         }
 
         .winamp-btn:active {
@@ -181,7 +168,7 @@
         }
 
         .winamp-volume {
-            margin: 2px 4px;
+            margin: 4px;
             display: flex;
             align-items: center;
             gap: 4px;
@@ -191,20 +178,18 @@
         }
 
         .volume-slider {
-            width: 80px;
-            height: 12px;
+            width: 68px;
+            height: 10px;
             background: #000000;
             border: 2px inset #ffc6cf;
             position: relative;
-            cursor: none;
+            cursor: pointer;
             border-radius: 2px;
-            padding: 8px;
-            margin: -8px;
         }
 
         .volume-fill {
             height: 100%;
-            background: linear-gradient(90deg, #f7e3e7 0%, #f2b3c0 25%, #ffc6cf 50%, #e699a3 75%, #d9869b 100%) !important;
+            background: linear-gradient(90deg, #f7e3e7 0%, #f2b3c0 30%, #ffc6cf 70%, #e699a3 100%);
             width: 70%;
             transition: width 0.1s;
             border-radius: 1px;
@@ -232,9 +217,6 @@
             text-decoration: none;
             transition: color 0.3s ease;
             cursor: none;
-            padding: 15px 20px;
-            margin: -15px -20px;
-            display: inline-block;
         }
 
         .bottom-nav a:hover {
@@ -253,27 +235,30 @@
 
         .signup-form {
             position: fixed;
-            top: 80px;
-            right: 80px;
+            bottom: 60px;
+            left: 0;
+            right: 0;
             z-index: 100;
             font-family: Arial, sans-serif;
-            font-size: 12px;
-            letter-spacing: 1px;
+            font-size: 32px;
+            letter-spacing: 2px;
             text-transform: uppercase;
+            padding: 0 40px;
         }
 
         .signup-form label {
             display: block;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 6px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 12px;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
         }
 
         .signup-form-row {
-            position: relative;
             display: flex;
             align-items: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-            width: 220px;
+            width: 100%;
         }
 
         .signup-form-row:focus-within {
@@ -286,16 +271,16 @@
             outline: none;
             color: #fff;
             font-family: Arial, sans-serif;
-            font-size: 12px;
-            letter-spacing: 1px;
+            font-size: 32px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            padding: 4px 0;
+            padding: 8px 0;
             width: 100%;
             cursor: none;
         }
 
         .signup-form input[type="email"]::placeholder {
-            color: rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.2);
         }
 
         .signup-form button {
@@ -303,11 +288,11 @@
             border: none;
             color: rgba(255, 255, 255, 0.7);
             font-family: Arial, sans-serif;
-            font-size: 12px;
-            letter-spacing: 1px;
+            font-size: 32px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            padding: 4px 0 4px 8px;
-            cursor: pointer;
+            padding: 8px 0 8px 24px;
+            cursor: none;
             white-space: nowrap;
             transition: color 0.3s ease;
             flex-shrink: 0;
@@ -318,7 +303,7 @@
         }
 
         .signup-form-msg {
-            margin-top: 6px;
+            margin-top: 8px;
             font-size: 12px;
             letter-spacing: 1px;
             color: rgba(255, 255, 255, 0.7);
@@ -374,7 +359,7 @@
     
         
 
-        <a href="https://www.fbi.radio/programs/the-live-feed/episodes/the-live-feed-1st-august-2025" target="_blank">Worlds Only - Moin - Vanguard - FBi 301 Mix.wav</a>
+        <a href="https://www.fbi.radio/programs/the-live-feed/episodes/the-live-feed-1st-august-2025" target="_blank">08.07.2025</a>
         <span class="nav-separator">,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,</span>
 
         <a href="https://worldsonly.bandcamp.com/album/raw-hot" target="_blank">RAW & HOT</a>
@@ -415,20 +400,23 @@
                 form.querySelector('button').disabled = true;
 
                 try {
-                    const res = await fetch('/api/subscribe', {
+                    const res = await fetch('/.netlify/functions/subscribe', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ email }),
                     });
                     const data = await res.json();
+                    console.log('subscribe response', res.status, data);
                     if (res.ok && data.ok) {
                         msg.textContent = 'you\'re in';
                         input.value = '';
                     } else {
+                        console.error('subscribe error:', data);
                         msg.textContent = data.error || 'something went wrong';
                         msg.className = 'signup-form-msg error';
                     }
-                } catch {
+                } catch (err) {
+                    console.error('subscribe fetch failed:', err);
                     msg.textContent = 'something went wrong';
                     msg.className = 'signup-form-msg error';
                 } finally {
