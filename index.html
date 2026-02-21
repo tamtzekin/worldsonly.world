@@ -398,7 +398,7 @@
 
     <div id="artwork-blur"></div>
     <form class="signup-form" id="signup-form" novalidate>
-        <div class="signup-form-row">
+        <div class="signup-form-row" id="signup-form-row">
             <input type="email" id="signup-email" name="email" placeholder="PUT YOUR EMAIL HERE" autocomplete="email" required>
             <button type="submit">OK</button>
         </div>
@@ -443,7 +443,11 @@
                     const data = await res.json();
                     console.log('subscribe response', res.status, data);
                     if (res.ok && data.ok) {
+                        document.getElementById('signup-form-row').style.display = 'none';
                         msg.textContent = 'check your email.....';
+                        msg.style.fontSize = '32px';
+                        msg.style.letterSpacing = '2px';
+                        msg.style.color = '#fff';
                         input.value = '';
                         setTimeout(fadeOut, 1800);
                         return;
