@@ -100,7 +100,7 @@ class WinampPlayer {
         const duration = this.audio.duration ? this.formatTime(this.audio.duration) : '--:--';
         
         const status = this.isPlaying ? '▶' : this.audio.paused ? '⏸' : '⏹';
-        this.display.textContent = `${track.title.toUpperCase()} - ${status} ${currentTime}/${duration}`;
+        this.display.textContent = `${track.title} — ${status} ${currentTime}/${duration}`;
     }
     
     formatTime(seconds) {
@@ -172,16 +172,16 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Load the full album playlist
     const playlist = [
-        { title: 'Cast', url: 'trax/01 Cast.mp3' },
-        { title: 'Still a light', url: 'trax/02 Still a light.mp3' },
-        { title: 'Thrice', url: 'trax/03 Thrice.mp3' },
-        { title: 'Bauhaus', url: 'trax/04 Bauhaus.mp3' },
-        { title: 'Unforgettable', url: 'trax/05 Unforgettable.mp3' },
-        { title: 'This could be', url: 'trax/06 This could be.mp3' },
-        { title: 'Stranger inspection', url: 'trax/07 Stranger inspection.mp3' },
-        { title: 'Lost and saved', url: 'trax/08 Lost and saved.mp3' },
-        { title: 'Bumbag', url: 'trax/09 Bumbag.mp3' },
-        { title: 'Would you leave yourself', url: 'trax/10 Would you leave yourself.mp3' }
+        { title: '𝔠𝔞𝔰𝔱', url: 'trax/01 Cast.mp3' },
+        { title: '𝔰𝔱𝔦𝔩𝔩 𝔞 𝔩𝔦𝔤𝔥𝔱', url: 'trax/02 Still a light.mp3' },
+        { title: '𝔱𝔥𝔯𝔦𝔠𝔢', url: 'trax/03 Thrice.mp3' },
+        { title: '𝔟𝔞𝔲𝔥𝔞𝔲𝔰', url: 'trax/04 Bauhaus.mp3' },
+        { title: '𝔲𝔫𝔣𝔬𝔯𝔤𝔢𝔱𝔱𝔞𝔟𝔩𝔢', url: 'trax/05 Unforgettable.mp3' },
+        { title: '𝔱𝔥𝔦𝔰 𝔠𝔬𝔲𝔩𝔡 𝔟𝔢', url: 'trax/06 This could be.mp3' },
+        { title: '𝔰𝔱𝔯𝔞𝔫𝔤𝔢𝔯 𝔦𝔫𝔰𝔭𝔢𝔠𝔱𝔦𝔬𝔫', url: 'trax/07 Stranger inspection.mp3' },
+        { title: '𝔩𝔬𝔰𝔱 𝔞𝔫𝔡 𝔰𝔞𝔳𝔢𝔡', url: 'trax/08 Lost and saved.mp3' },
+        { title: '𝔟𝔲𝔪𝔟𝔞𝔤', url: 'trax/09 Bumbag.mp3' },
+        { title: '𝔴𝔬𝔲𝔩𝔡 𝔶𝔬𝔲 𝔩𝔢𝔞𝔳𝔢 𝔶𝔬𝔲𝔯𝔰𝔢𝔩𝔣', url: 'trax/10 Would you leave yourself.mp3' }
     ];
     
     player.loadPlaylist(playlist);

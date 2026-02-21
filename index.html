@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Worlds Only</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -20,7 +17,7 @@
         }
 
         body {
-            font-family: 'Lobster Two', cursive;
+            font-family: Arial, sans-serif;
             background: #000;
             color: #fff;
             overflow: hidden;
@@ -97,7 +94,7 @@
             height: 36px;
             background: rgba(0, 0, 0, 0.85);
             border-bottom: 1px solid rgba(255, 198, 207, 0.2);
-            font-family: 'Lobster Two', cursive;
+            font-family: Arial, sans-serif;
             font-size: 8px;
             z-index: 200;
             display: flex;
@@ -114,7 +111,7 @@
         .winamp-display {
             background: transparent;
             color: #ffc6cf;
-            font-family: 'Lobster Two', cursive;
+            font-family: Arial, sans-serif;
             font-size: 11px;
             text-shadow: 0 0 6px rgba(255, 198, 207, 0.6);
             overflow: hidden;
@@ -194,7 +191,7 @@
             justify-content: space-between;
             align-items: center;
             z-index: 50;
-            font-family: 'Lobster Two', cursive;
+            font-family: Arial, sans-serif;
             font-size: 12px;
             font-weight: normal;
             letter-spacing: 1px;
@@ -249,10 +246,9 @@
             transform: translate(-50%, -50%);
             width: 80%;
             z-index: 100;
-            font-family: 'Lobster Two', cursive;
+            font-family: Arial, sans-serif;
             font-size: 32px;
             letter-spacing: 2px;
-            text-transform: uppercase;
             padding: 32px 40px;
             background: transparent;
             border: none;
@@ -299,10 +295,9 @@
             border: none;
             outline: none;
             color: #fff;
-            font-family: 'Lobster Two', cursive;
+            font-family: Arial, sans-serif;
             font-size: 32px;
             letter-spacing: 2px;
-            text-transform: uppercase;
             padding: 8px 0;
             width: 100%;
             cursor: none;
@@ -316,10 +311,9 @@
             background: transparent;
             border: none;
             color: rgba(255, 198, 207, 0.7);
-            font-family: 'Lobster Two', cursive;
+            font-family: Arial, sans-serif;
             font-size: 32px;
             letter-spacing: 2px;
-            text-transform: uppercase;
             padding: 8px 0 8px 24px;
             cursor: none;
             white-space: nowrap;
@@ -337,7 +331,6 @@
             letter-spacing: 1px;
             color: rgba(255, 198, 207, 0.7);
             min-height: 16px;
-            text-transform: uppercase;
         }
 
         .signup-form-msg.error {
@@ -362,7 +355,7 @@
             <button class="winamp-btn" id="stop-btn">⏹</button>
             <button class="winamp-btn" id="next-btn">⏭</button>
         </div>
-        <div class="winamp-display" id="track-display">WOULD YOU LEAVE YOURSELF</div>
+        <div class="winamp-display" id="track-display">𝔚𝔬𝔲𝔩𝔡 𝔜𝔬𝔲 𝔏𝔢𝔞𝔳𝔢 𝔜𝔬𝔲𝔯𝔰𝔢𝔩𝔣</div>
         <div class="winamp-volume">
             <span>VOL</span>
             <div class="volume-slider" id="volume-slider">
@@ -389,8 +382,8 @@
     <div id="artwork-blur"></div>
     <form class="signup-form" id="signup-form" novalidate>
         <div class="signup-form-row" id="signup-form-row">
-            <input type="email" id="signup-email" name="email" placeholder="PUT YOUR EMAIL HERE" autocomplete="email" required>
-            <button type="submit">OK</button>
+            <input type="email" id="signup-email" name="email" placeholder="𝔓𝔲𝔱 𝔶𝔬𝔲𝔯 𝔢𝔪𝔞𝔦𝔩 𝔥𝔢𝔯𝔢" autocomplete="email" required>
+            <button type="submit">𝔖𝔦𝔤𝔫 𝔘𝔭</button>
         </div>
         <div class="signup-form-msg" id="signup-msg" aria-live="polite"></div>
     </form>
@@ -434,7 +427,7 @@
                     console.log('subscribe response', res.status, data);
                     if (res.ok && data.ok) {
                         document.getElementById('signup-form-row').style.display = 'none';
-                        msg.textContent = 'check your email.....';
+                        msg.textContent = '𝔠𝔥𝔢𝔠𝔨 𝔶𝔬𝔲𝔯 𝔢𝔪𝔞𝔦𝔩.....';
                         msg.style.fontSize = '32px';
                         msg.style.letterSpacing = '2px';
                         msg.style.color = '#fff';
