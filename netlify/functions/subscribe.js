@@ -27,9 +27,9 @@ exports.handler = async (event) => {
         await resend.emails.send({
             from: 'Worlds Only <band@worldsonly.world>',
             to: email,
-            subject: "you're in",
-            html: `<p>you're on the list.</p><p>— worlds only</p>`,
-            text: `you're on the list.\n\n— worlds only`,
+            subject: "Hello from Worlds Only",
+            html: `<p>Welcome to W0`,
+            text: `We'll send you updates about Worlds Only, leaks, links, etc.`,
         });
 
         return {

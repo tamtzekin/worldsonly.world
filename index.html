@@ -215,40 +215,79 @@
         .bottom-nav a {
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, opacity 0.3s ease;
             cursor: none;
+            display: inline-flex;
+            align-items: flex-end;
         }
 
         .bottom-nav a:hover {
             color: #ffc6cf;
         }
 
+        @keyframes bob {
+            0%   { transform: translateY(0px) scaleY(1); }
+            40%  { transform: translateY(-5px) scaleY(1.02); }
+            50%  { transform: translateY(-6px) scaleY(1.02); }
+            60%  { transform: translateY(-5px) scaleY(1.02); }
+            90%  { transform: translateY(1px) scaleY(0.99); }
+            100% { transform: translateY(0px) scaleY(1); }
+        }
+
+        .bottom-nav a img {
+            height: 60px;
+            width: auto;
+            image-rendering: pixelated;
+            opacity: 0.85;
+            transition: opacity 0.3s ease;
+            transform-origin: bottom center;
+        }
+
+        .bottom-nav a:hover img {
+            opacity: 1;
+            animation: bob 3.499s ease-in-out infinite;
+        }
+
         .nav-separator {
-            flex: 1;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 12px;
-            letter-spacing: 8px;
-            overflow: hidden;
-            white-space: nowrap;
+            display: none;
         }
 
         .signup-form {
             position: fixed;
-            bottom: 60px;
-            left: 0;
-            right: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
             z-index: 100;
             font-family: Arial, sans-serif;
             font-size: 32px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            padding: 0 40px;
+            padding: 32px 40px;
+            background: transparent;
+            border: none;
+        }
+
+        #artwork-blur {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vh;
+            height: 80vh;
+            background-image: url('artwork.png');
+            background-size: cover;
+            background-position: center;
+            filter: blur(48px) brightness(0.4);
+            z-index: 2;
+            opacity: 0.95;
+            pointer-events: none;
+            transition: opacity 1.2s ease;
         }
 
         .signup-form label {
             display: block;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(0, 0, 0, 0.5);
             font-size: 12px;
             letter-spacing: 1px;
             margin-bottom: 8px;
@@ -257,12 +296,12 @@
         .signup-form-row {
             display: flex;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            border-bottom: 1px solid rgba(255, 198, 207, 0.3);
             width: 100%;
         }
 
         .signup-form-row:focus-within {
-            border-bottom-color: #ffc6cf;
+            border-bottom-color: rgba(255, 198, 207, 0.8);
         }
 
         .signup-form input[type="email"] {
@@ -280,13 +319,13 @@
         }
 
         .signup-form input[type="email"]::placeholder {
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 198, 207, 0.5);
         }
 
         .signup-form button {
             background: transparent;
             border: none;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 198, 207, 0.7);
             font-family: Arial, sans-serif;
             font-size: 32px;
             letter-spacing: 2px;
@@ -299,14 +338,14 @@
         }
 
         .signup-form button:hover {
-            color: #ffc6cf;
+            color: #fff;
         }
 
         .signup-form-msg {
-            margin-top: 8px;
+            margin-top: 4px;
             font-size: 12px;
             letter-spacing: 1px;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 198, 207, 0.7);
             min-height: 16px;
             text-transform: uppercase;
         }
@@ -345,39 +384,23 @@
     
     <nav class="bottom-nav">
 
-      <a href="https://t.me/+YOUR_GROUP_INVITE_CODE" target="_blank">JOIN</a>
-      <span class="nav-separator">,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,</span>
+        <a href="https://youtu.be/CWCauw0SXVQ" target="_blank" title="30.01.2024"><img src="assets/char1.png" alt="30.01.2024"></a>
+        <a href="https://worldsonly.bandcamp.com/album/courage-to-detour-and-patience-to-wait" target="_blank" title="Courage to Detour and Patience to Wait"><img src="assets/char2.png" alt="Courage to Detour"></a>
+        <a href="https://www.fbi.radio/programs/the-live-feed/episodes/the-live-feed-1st-august-2025" target="_blank" title="08.07.2025"><img src="assets/char3.png" alt="08.07.2025"></a>
+        <a href="https://worldsonly.bandcamp.com/album/raw-hot" target="_blank" title="Raw & Hot"><img src="assets/char4.png" alt="Raw & Hot"></a>
+        <a href="https://worldsonly.bandcamp.com/album/raw-hot-uncut" target="_blank" title="Raw & Hot & Uncut"><img src="assets/char5.png" alt="Raw & Hot & Uncut"></a>
+        <a href="https://worldsonly.bandcamp.com/album/would-you-leave-yourself" target="_blank" title="Would You Leave Yourself"><img src="assets/char6.png" alt="Would You Leave Yourself"></a>
+        <a href="mailto:hello@worldsonly.world" title="Contact"><img src="assets/char7.png" alt="Contact"></a>
 
-      
-        <a href="https://youtu.be/CWCauw0SXVQ" target="_blank">30.01.2024</a>
-        <span class="nav-separator">,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,</span>
-
-        <a href="https://worldsonly.bandcamp.com/album/courage-to-detour-and-patience-to-wait" target="_blank">COURAGE TO DETOUR AND PATIENCE TO WAIT</a>
-
-        <span class="nav-separator">,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,</span>
-
-    
-        
-
-        <a href="https://www.fbi.radio/programs/the-live-feed/episodes/the-live-feed-1st-august-2025" target="_blank">08.07.2025</a>
-        <span class="nav-separator">,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,</span>
-
-        <a href="https://worldsonly.bandcamp.com/album/raw-hot" target="_blank">RAW & HOT</a>
-        <span class="nav-separator">,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,</span>
-
-        <a href="https://worldsonly.bandcamp.com/album/raw-hot-uncut" target="_blank">RAW & HOT & UNCUT</a>
-        <span class="nav-separator">,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,</span>
-
-        
     </nav>
 
     <audio id="audio-player" preload="metadata"></audio>
 
+    <div id="artwork-blur"></div>
     <form class="signup-form" id="signup-form" novalidate>
-        <label for="signup-email">Mailing list</label>
         <div class="signup-form-row">
-            <input type="email" id="signup-email" name="email" placeholder="your@email.com" autocomplete="email" required>
-            <button type="submit">Send</button>
+            <input type="email" id="signup-email" name="email" placeholder="PUT YOUR EMAIL HERE" autocomplete="email" required>
+            <button type="submit">OK</button>
         </div>
         <div class="signup-form-msg" id="signup-msg" aria-live="polite"></div>
     </form>
@@ -387,8 +410,20 @@
     <script>
         (function () {
             const form = document.getElementById('signup-form');
+            const blur = document.getElementById('artwork-blur');
             const input = document.getElementById('signup-email');
             const msg = document.getElementById('signup-msg');
+
+            function fadeOut() {
+                form.style.transition = 'opacity 1.2s ease';
+                blur.style.transition = 'opacity 1.2s ease';
+                form.style.opacity = '0';
+                blur.style.opacity = '0';
+                setTimeout(() => {
+                    form.style.display = 'none';
+                    blur.style.display = 'none';
+                }, 1200);
+            }
 
             form.addEventListener('submit', async function (e) {
                 e.preventDefault();
@@ -408,20 +443,21 @@
                     const data = await res.json();
                     console.log('subscribe response', res.status, data);
                     if (res.ok && data.ok) {
-                        msg.textContent = 'you\'re in';
+                        msg.textContent = 'check your email.....';
                         input.value = '';
+                        setTimeout(fadeOut, 1800);
+                        return;
                     } else {
                         console.error('subscribe error:', data);
-                        msg.textContent = data.error || 'something went wrong';
+                        msg.textContent = data.error || 'did you type it wrong?';
                         msg.className = 'signup-form-msg error';
                     }
                 } catch (err) {
                     console.error('subscribe fetch failed:', err);
-                    msg.textContent = 'something went wrong';
+                    msg.textContent = 'did you type it wrong?';
                     msg.className = 'signup-form-msg error';
-                } finally {
-                    form.querySelector('button').disabled = false;
                 }
+                form.querySelector('button').disabled = false;
             });
         })();
     </script>
